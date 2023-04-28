@@ -6,7 +6,7 @@ serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # get local machine name
 host = socket.gethostname()
 
-port = 9999
+port = 9919
 time =0.000
 # bind the socket to a public host, and a port
 serversocket.bind((host, port))
@@ -27,7 +27,5 @@ while True:
     x = clientsocket.recv(1024)
     x = x.decode('utf-8')
     print(x)
-    time = time+float(x)
-    print(time)
     # close the client socket
     clientsocket.close()

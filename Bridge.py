@@ -1,5 +1,5 @@
 import socket
-
+import time
 # create a socket object
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -7,7 +7,10 @@ serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 host = socket.gethostname()
 
 port = 9999
-
+host1="Tower.VANET-Project.ch-geni-net.instageni.clemson.edu"
+port1=9919
+total=0.000
+num=0
 # bind the socket to a public host, and a port
 serversocket.bind((host, port))
 
@@ -37,14 +40,22 @@ while True:
     message2 = str(result2).encode('utf-8')
     clientsocket.sendall(message2)
 
-    time = clientsocket.recv(1024)
-    time = time.decode('utf-8')
-    print(time)
-    host1="Tower.VANET-Project.ch-geni-net.instageni.clemson.edu"
-    port1=9999
+    time1 = clientsocket.recv(1024)
+    time1 = time1.decode('utf-8')
+    print(time1)
+    total=float(time1)+total
+    num=num+1
     clientsocket.close()
-    clientsocketq = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    clientsocketq.connect((host1,port1))
-    clientsocketq.sendall(time)
+    if num>= 5:
+        start_time= time.time()
+        clientsocketq = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        clientsocketq.connect((host1,port1))
+        end_time= time.time()
+        elapsed_time1=end_time-start_time
+        elapsed_time1=elapsed_time1*1000
+        x=round(elapsed_time1,3)
+        total=total+x
+        total = str(total).encode('utf-8')
+        clientsocketq.sendall(total)
 
     # close the client socket
