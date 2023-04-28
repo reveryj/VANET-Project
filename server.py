@@ -7,7 +7,7 @@ serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 host = socket.gethostname()
 
 port = 9999
-
+time =0.000
 # bind the socket to a public host, and a port
 serversocket.bind((host, port))
 
@@ -23,19 +23,11 @@ while True:
     print("Got a connection from {}".format(addr))
 
     # receive data from the client
-    micro_data = clientsocket.recv(1024)
-    # add 5 to the data
-    result1 = int(micro_data.decode('utf-8')) + 5
-    # send the result back to the client
-    message1 = str(result1).encode('utf-8')
-    clientsocket.sendall(message1)
 
-    macro_data = clientsocket.recv(1024)
-    # add 7 to the data
-    result2 = int(macro_data.decode('utf-8')) + 7
-    # send the result back to the client
-    message2 = str(result2).encode('utf-8')
-    clientsocket.sendall(message2)
-
+    x = clientsocket.recv(1024)
+    x = x.decode('utf-8')
+    print(x)
+    time = time+float(x)
+    print(time)
     # close the client socket
     clientsocket.close()
