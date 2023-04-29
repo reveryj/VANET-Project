@@ -5,9 +5,9 @@ start_time1 = time.time()
 clientsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # get local machine name
-host = "pcvm1-12"
+host = "Car-3.VANET-Final.ch-geni-net.instageni.clemson.edu"
 
-port = 1999
+port = 9991
 
 # connect to the server
 clientsocket.connect((host, port))
